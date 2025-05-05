@@ -11,7 +11,9 @@ cnpj = distribuidora['CNPJ'] # CNPJ da empresa
 
 for prod in insumos:
     codigo = prod['prod']['cProd'] # Código do produto
-    descricao = prod['prod']['xProd'] # Descrição do produto
+    descricaoExtendida = prod['prod']['xProd'] # Descrição extendida do produto
+    descricao = descricaoExtendida[0:descricaoExtendida.index('--')].strip() # Descrição do produto
+    gramaturaVendida = descricaoExtendida[descricaoExtendida.index('--')+2:descricaoExtendida.index('Lote')].strip() # Gramatura vendida do produto
     ncm = prod['prod']['NCM'] # NCM do produto
     unidade = prod['prod']['uCom'] # Unidade de medida do produto
     quantidade = prod['prod']['qCom'] # Quantidade do produto
@@ -23,3 +25,5 @@ for prod in insumos:
     valorICMS = prod['imposto']['ICMS']['ICMS00']['vICMS'] # Valor do ICMS do produto
     valorBaseCalcICMS = prod['imposto']['ICMS']['ICMS00']['vBC'] # Valor da base de cálculo do ICMS do produto
     aliquotaICMS = prod['imposto']['ICMS']['ICMS00']['pICMS'] # Alíquota do ICMS do produto
+    produtoCompleto = [codigo, descricao, gramaturaVendida, ncm, unidade, quantidade, valorUnit, valorTotal, valorFrete, dataFab, dataVal, valorICMS, valorBaseCalcICMS, aliquotaICMS]
+    print(produtoCompleto)
