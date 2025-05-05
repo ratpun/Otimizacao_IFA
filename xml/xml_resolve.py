@@ -1,0 +1,25 @@
+import xmltodict
+
+with open("C:/Users/rafaellazaro/Downloads/XML E PDF FARMANIA 042024 À 032025/XML/Notas_384946025-04-2025_Chave_42240409026759000118550010002634381183340120S_57.xml", "rb") as arquivo_insumos:
+    dic_notaFiscal = xmltodict.parse(arquivo_insumos.read())
+
+insumos = dic_notaFiscal['nfeProc']['NFe']['infNFe']['det']
+distribuidora = dic_notaFiscal['nfeProc']['NFe']['infNFe']['emit']
+
+empresa = distribuidora['xNome'] # Nome da empresa
+cnpj = distribuidora['CNPJ'] # CNPJ da empresa
+
+for prod in insumos:
+    print(prod['prod']['cProd']) # Código do produto
+    print(prod['prod']['xProd']) # Descrição do produto
+    print(prod['prod']['NCM']) # NCM do produto
+    print(prod['prod']['uCom']) # Unidade de medida do produto
+    print(prod['prod']['qCom']) # Quantidade do produto
+    print(prod['prod']['vUnCom']) # Valor unitário do produto
+    print(prod['prod']['vProd']) # Valor total do produto
+    print(prod['prod']['vFrete']) # Valor do frete do produto
+    print(prod['prod']['rastro']['dFab']) # Data de fabricação do produto
+    print(prod['prod']['rastro']['dVal']) # Data de validade do produto
+    print(prod['imposto']['ICMS']['ICMS00']['vICMS']) # Valor do ICMS do produto
+    print(prod['imposto']['ICMS']['ICMS00']['vBC']) # Valor da base de cálculo do ICMS do produto
+    print(prod['imposto']['ICMS']['ICMS00']['pICMS']) # Alíquota do ICMS do produto
